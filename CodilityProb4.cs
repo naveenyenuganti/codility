@@ -4,29 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodililtyProb4
+namespace CodilityProb4
 {
     class Program
     {
-        public int Solution(int[] A, int[] B) {
-            decimal[] C = new decimal[A.Length];
+        int GetCount(LinkedList<string> list)
+        {
             int count = 0;
-            for (int i = 0; i < A.Length; i++)
+            foreach (var item in list)
             {
-                C[i] = Convert.ToDecimal(((A[i] * 1000000) + B[i]))/ 1000000;
-                Console.WriteLine(C[i]);
-            }
-
-            for (int i = 0; i < A.Length; i++)
-            {
-                for (int j = i+1; j < A.Length; j++)
-                {
-                    if ((C[i]*C[j]) >= (C[i] + C[j]))
-                    {
-                      //  Console.WriteLine(i+"  "+j+"  "+(C[i] * C[j]) +" >= "+ (C[i] + C[j]) + " =====> " +C[i]+" "+C[j]);
-                        count++;
-                    }
-                }
+                count++;
             }
 
             return count;
@@ -34,10 +21,26 @@ namespace CodililtyProb4
 
         static void Main(string[] args)
         {
+            LinkedList<string> list = new LinkedList<string>();
+            string s;
+            bool loop = true;
+            while (loop)
+            {
+                s = Console.ReadLine();
+
+                if (s.Equals("End"))
+                {
+                    loop = false;
+                }
+                else if (list.Count == 0)
+                    list.AddFirst(s);
+                else
+                    list.AddLast(s);
+            }
             Program p = new Program();
-            int[] A = { 0, 1, 2, 2, 3, 5 };
-            int[] B = { 500000, 500000, 0, 0, 0, 20000 };
-            Console.WriteLine( "Count = "+ p.Solution(A, B)); 
+            Console.WriteLine("Length = " + p.GetCount(list));
         }
+
+
     }
 }
